@@ -1,9 +1,26 @@
 import React from 'react';
 import Book from './Book';
 import BooksListInteraction from './BooksListInteraction';
+import * as BooksAPI from './BooksAPI';
+
+const shelfs = require('./shelfs.json');
 
 class BooksList extends React.Component {
+    state = {
+        books: [],
+    };
+
+    componentDidMount() {
+        BooksAPI.getAll().then((books) => {
+            this.setState(() => ({
+                books: books,
+            }));
+            console.dir(books);
+        });
+    }
+
     render() {
+        const books = this.props.books;
         return (
             <div className="list-books">
                 <div className="list-books-content">
