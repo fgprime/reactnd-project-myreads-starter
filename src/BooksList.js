@@ -35,7 +35,7 @@ class BooksList extends React.Component {
                                 this.areBooksInShelf(shelf) && (
                                     <BookShelf
                                         key={shelf.id}
-                                        name={shelf.name}
+                                        shelf={shelf}
                                         books={this.state.books}
                                     />
                                 )
