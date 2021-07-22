@@ -1,7 +1,7 @@
 import React from 'react';
-import Book from './Book';
 import BooksListInteraction from './BooksListInteraction';
 import * as BooksAPI from './BooksAPI';
+import BookShelf from './BookShelf';
 
 const shelfs = require('./shelfs.json');
 
@@ -15,9 +15,14 @@ class BooksList extends React.Component {
             this.setState(() => ({
                 books: books,
             }));
-            console.dir(books);
         });
     }
+
+    areBooksInShelf = (shelf) => {
+        return this.state.books.some((book) => {
+            return book.shelf === shelf.id;
+        });
+    };
 
     render() {
         const books = this.props.books;
@@ -25,18 +30,16 @@ class BooksList extends React.Component {
             <div className="list-books">
                 <div className="list-books-content">
                     <div>
-                        <div className="bookshelf">
-                            <h2 className="bookshelf-title">
-                                Currently Reading
-                            </h2>
-                            <div className="bookshelf-books">
-                                <ol className="books-grid">
-                                    <li>
-                                        <Book />
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
+                        {shelfs.map(
+                            (shelf) =>
+                                this.areBooksInShelf(shelf) && (
+                                    <BookShelf
+                                        key={shelf.id}
+                                        name={shelf.name}
+                                        books={this.state.books}
+                                    />
+                                )
+                        )}
                     </div>
                 </div>
                 <BooksListInteraction />
