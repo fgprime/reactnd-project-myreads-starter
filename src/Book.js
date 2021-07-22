@@ -19,7 +19,10 @@ class Book extends React.Component {
                             })`,
                         }}
                     />
-                    <BookShelfChanger book={book} />
+                    <BookShelfChanger
+                        book={book}
+                        updateBookShelf={this.props.updateBookShelf}
+                    />
                 </div>
                 <div className="book-title">{title}</div>
                 <div className="book-authors">{authors.join(', ')} </div>
