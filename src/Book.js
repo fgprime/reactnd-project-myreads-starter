@@ -4,7 +4,10 @@ import BookShelfChanger from './BookShelfChanger';
 class Book extends React.Component {
     render() {
         const book = this.props.book;
-        const { authors, imageLinks, title } = book;
+        const { title } = book;
+
+        const imageLink = book.imageLinks ? book.imageLinks.smallThumbnail : '';
+        const authors = book.authors ? book.authors.join(', ') : '';
 
         return (
             <div className="book">
@@ -14,9 +17,7 @@ class Book extends React.Component {
                         style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: `url(${
-                                imageLinks.smallThumbnail
-                            })`,
+                            backgroundImage: `url(${imageLink})`,
                         }}
                     />
                     <BookShelfChanger
@@ -25,7 +26,7 @@ class Book extends React.Component {
                     />
                 </div>
                 <div className="book-title">{title}</div>
-                <div className="book-authors">{authors.join(', ')} </div>
+                <div className="book-authors">{authors} </div>
             </div>
         );
     }
