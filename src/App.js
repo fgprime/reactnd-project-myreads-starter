@@ -30,7 +30,7 @@ class BooksApp extends React.Component {
             let newState = prevState;
             index >= 0
                 ? (newState[index] = newBookWithShelf)
-                : newState.push(newBookWithShelf);
+                : newState.books.push(newBookWithShelf);
 
             return {
                 newState,
@@ -46,7 +46,9 @@ class BooksApp extends React.Component {
                 <div className="app">
                     <Switch>
                         <Route path="/search">
-                            <BookSearch />
+                            <BookSearch
+                                updateBookShelf={this.updateBookShelf}
+                            />
                         </Route>
                         <Route path="/">
                             <Header />
