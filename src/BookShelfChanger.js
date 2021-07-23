@@ -14,7 +14,6 @@ class BookShelfChanger extends React.Component {
             shelf: shelf,
         }));
         this.props.updateBookShelf(book, shelf);
-        console.dir(event.target.value);
     };
 
     render() {
