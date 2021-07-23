@@ -20,25 +20,32 @@ class BookSearch extends React.Component {
              * Search with an empty query string leads to an 403 in the API
              * Therefore it will be handled manually and results will be emptied
              */
-            this.setState((prevState) => ({
-                results: [],
-            }));
+            this.emptyResults();
         } else {
-            BooksAPI.search(query).then((books) => {
-                if (Array.isArray(books) && this.state.query !== '') {
-                    this.setState((prevState) => ({
-                        results: books,
-                    }));
-                } else {
-                    /*
-                     * Handle empty result from API
-                     */
-                    this.setState((prevState) => ({
-                        results: [],
-                    }));
-                }
-            });
+            BooksAPI.search(query)
+                .then((books) => {
+                    if (Array.isArray(books) && this.state.query !== '') {
+                        this.setState((prevState) => ({
+                            results: books,
+                        }));
+                    } else {
+                        /*
+                         * Handle empty result from API
+                         */
+                        this.emptyResults();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.emptyResults();
+                });
         }
+    };
+
+    emptyResults = () => {
+        this.setState((prevState) => ({
+            results: [],
+        }));
     };
 
     render() {
