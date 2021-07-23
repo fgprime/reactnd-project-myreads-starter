@@ -19,6 +19,9 @@ class BooksList extends React.Component {
     }
 
     areBooksInShelf = (shelf) => {
+        //If a book is in category none it should not be shown
+        if (shelf.id === 'none') return false;
+
         return this.state.books.some((book) => {
             return book.shelf === shelf.id;
         });
@@ -41,6 +44,8 @@ class BooksList extends React.Component {
                 newState,
             };
         });
+
+        BooksAPI.update(book, shelf);
     };
 
     render() {
