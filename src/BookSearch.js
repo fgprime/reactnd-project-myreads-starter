@@ -52,6 +52,15 @@ class BookSearch extends React.Component {
         }));
     };
 
+    getBookFromShelves = (book) => {
+        const { booksOnShelves } = this.props;
+        const index = booksOnShelves.findIndex((element) => {
+            return element.id === book.id;
+        });
+        console.dir(index);
+        return index >= 0 ? booksOnShelves[index] : book;
+    };
+
     render() {
         return (
             <div className="search-books">
@@ -70,14 +79,20 @@ class BookSearch extends React.Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.state.results.map((book) => (
-                            <li key={book.id}>
-                                <Book
-                                    book={book}
-                                    updateBookShelf={this.props.updateBookShelf}
-                                />
-                            </li>
-                        ))}
+                        {console.dir(this.state.results)}
+                        {this.state.results.map((book) => {
+                            const bookFromShelf = this.getBookFromShelves(book);
+                            return (
+                                <li key={bookFromShelf.id}>
+                                    <Book
+                                        book={bookFromShelf}
+                                        updateBookShelf={
+                                            this.props.updateBookShelf
+                                        }
+                                    />
+                                </li>
+                            );
+                        })}
                     </ol>
                 </div>
             </div>

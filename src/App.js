@@ -45,6 +45,7 @@ class BooksApp extends React.Component {
                     <Switch>
                         <Route path="/search">
                             <BookSearch
+                                booksOnShelves={this.state.books}
                                 updateBookShelf={this.updateBookShelf}
                             />
                         </Route>
