@@ -57,7 +57,6 @@ class BookSearch extends React.Component {
         const index = booksOnShelves.findIndex((element) => {
             return element.id === book.id;
         });
-        console.dir(index);
         return index >= 0 ? booksOnShelves[index] : book;
     };
 
@@ -79,7 +78,6 @@ class BookSearch extends React.Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {console.dir(this.state.results)}
                         {this.state.results.map((book) => {
                             const bookFromShelf = this.getBookFromShelves(book);
                             return (
