@@ -25,7 +25,7 @@ class BookSearch extends React.Component {
             }));
         } else {
             BooksAPI.search(query).then((books) => {
-                if (Array.isArray(books)) {
+                if (Array.isArray(books) && this.state.query !== '') {
                     this.setState((prevState) => ({
                         results: books,
                     }));
