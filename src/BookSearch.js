@@ -25,12 +25,16 @@ class BookSearch extends React.Component {
             BooksAPI.search(query)
                 .then((books) => {
                     if (Array.isArray(books) && this.state.query !== '') {
+                        const validBooks = books.filter((book) => {
+                            return book.imageLinks && book.authors;
+                        });
                         this.setState((prevState) => ({
-                            results: books,
+                            results: validBooks,
                         }));
                     } else {
                         /*
                          * Handle empty result from API
+                         * Handle async response with an empty query string
                          */
                         this.emptyResults();
                     }
