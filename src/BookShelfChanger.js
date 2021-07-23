@@ -3,7 +3,7 @@ const shelfs = require('./shelfs.json');
 
 class BookShelfChanger extends React.Component {
     state = {
-        shelf: this.props.book.shelf,
+        shelf: this.props.book.shelf || 'none',
     };
 
     updateBookShelf = (event) => {
